@@ -21,10 +21,17 @@
     <ClCompile Include="..\..\Downloads\glad\src\glad.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Pipeline\Pipeline.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="Shaders\vert.glsl" />
-    <None Include="Shaders\frag.glsl" />
+    <ClInclude Include="Pipeline\Pipeline.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\OpenGL\frag.glsl" />
+    <None Include="Shaders\OpenGL\vert.glsl" />
   </ItemGroup>
 </Project>

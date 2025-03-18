@@ -10,6 +10,8 @@
 // Global
 GLuint VAO;
 GLuint VBO;
+GLuint gIndexBufferObject = 0;
+GLuint gVertexBufferObject = 0;
 //GLuint colorVBO;
 
 // Shader program
@@ -46,25 +48,34 @@ namespace Pipeline {
         glBindVertexArray(VAO);
 
         std::vector<GLfloat> vertexData{
-             -0.5f, -0.5f, 0.0f,  // Base esquerda
-             1.0f, 0.0f, 0.0f,   // color
-             0.5f, -0.5f, 0.0f,  // Base direita
-             0.0f, 1.0f, 0.0f,   // color
-             -0.5f, 0.5f, 0.0f,   // Ponta superior
-             0.0f, 0.0f, 1.0f,    // color
-          
-             0.5f, -0.5f, 0.0f,  // Base esquerda
-             0.0f, 1.0f, 0.0f,   // color
-             0.5f, 0.5f, 0.0f,  // Base direita
-             0.0f, 0.0f, 1.0f,   // color
-             -0.5f, 0.5f, 0.0f,   // Ponta superior
-             0.0f, 0.0f, 1.0f,    // color
+            // 0 - vertex           // colors
+            -0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,   
+            // 1 - vertex 
+            0.5f, -0.5f, 0.0f,      0.0f, 1.0f, 0.0f,
+            // 2 - vertex 
+            -0.5f, 0.5f, 0.0f,      0.0f, 0.0f, 1.0f,       
+            // 3 - vertex 
+            0.5f, 0.5f, 0.0f,       0.0f, 0.0f, 1.0f,   
         };
         
         // Criar e configurar VBO para posição
         glGenBuffers(1, &VBO);
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, vertexData.size() * sizeof(GLfloat), vertexData.data(), GL_STATIC_DRAW);
+
+        const std::vector<GLuint> indexBufferData{2, 0, 1,3, 2, 1};
+
+        // setup the index buffer object (IBO i.e. EBO)
+        glGenBuffers(1, &gIndexBufferObject);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gIndexBufferObject);
+        
+        // populate our index buffer
+        glBufferData(
+            GL_ELEMENT_ARRAY_BUFFER, 
+            indexBufferData.size() * sizeof(GLfloat), 
+            indexBufferData.data(),
+            GL_STATIC_DRAW
+        );
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 
@@ -154,6 +165,6 @@ namespace Pipeline {
 
         glUseProgram(gProgramPipeline); // Ativar o shader antes de desenhar
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 }

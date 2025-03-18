@@ -140,6 +140,8 @@
     <ClInclude Include="Pipeline\Pipeline.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="README.md" />
     <None Include="Shaders\OpenGL\frag.glsl" />
     <None Include="Shaders\OpenGL\vert.glsl" />
   </ItemGroup>

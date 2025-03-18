@@ -33,5 +33,7 @@
   <ItemGroup>
     <None Include="Shaders\OpenGL\frag.glsl" />
     <None Include="Shaders\OpenGL\vert.glsl" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
